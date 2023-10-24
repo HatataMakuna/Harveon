@@ -1,0 +1,109 @@
+package model;
+
+import java.sql.*;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.swing.*;
+
+public class AdminRatingCommentDA {
+
+    @PersistenceContext
+    EntityManager mgr;
+    @Resource
+    Query query;
+    
+    private String host = "jdbc:derby://localhost:1527/HarvenDB";
+    private String user = "HarvenDB";
+    private String password = "HarvenDB";
+    private String tableName = "ADMIN_RATING_COMMENT";
+    private Connection conn;
+    private PreparedStatement stmt;
+
+    public AdminRatingCommentDA() {
+        createConnection();
+    }
+
+    public AdminRatingCommentDA(EntityManager mgr){
+        this.mgr = mgr;
+    }
+
+    public List<AdminRatingComment> getAdminComment() {
+        List AdminRatingCommentList = mgr.createNamedQuery("AdminRatingComment.findAll").getResultList();
+        return AdminRatingCommentList;
+    }
+    public void addRecord(AdminRatingComment adminRatingComment) {
+        String insertStr = "INSERT INTO " + tableName + " VALUES(?, ?, ?)";
+        try {
+            stmt = conn.prepareStatement(insertStr);
+            stmt.setString(1, adminRatingComment.getId());
+            stmt.setString(2, adminRatingComment.getRatingCommentId().getRatingCommentId());
+            stmt.setString(3, adminRatingComment.getComment());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERRORERRORERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+//    public void updateRecord(AdminRatingComment adminRatingComment) {
+//        try {
+//            String updateStr = "UPDATE " + tableName + " SET STAFF_ID = ?, Comment = ? , RATING_COMMENT_ID = ?" + " WHERE Id = ?";
+//            stmt = conn.prepareStatement(updateStr);
+//            stmt.setString(4, adminRatingComment.getId());
+//            stmt.setString(3, adminRatingComment.getRatingCommentId().getRatingCommentId());
+//            stmt.setString(1, adminRatingComment.getStaffId().getStaffId());
+//            stmt.setString(2, adminRatingComment.getComment());
+//            stmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
+    
+    public void deleteRecord(String id) {
+        try {
+            String deleteStr = "DELETE FROM " + tableName + " WHERE id = ?";
+            stmt = conn.prepareStatement(deleteStr);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public int getLength() {
+        String queryStr = "SELECT * FROM " + tableName;
+        int x = 0;
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                x++;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERRORERRORERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return  x;
+    }
+
+    private void createConnection() {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            conn = DriverManager.getConnection(host, user, password);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void shutDown() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+}

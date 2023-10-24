@@ -1,0 +1,104 @@
+    <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Registration supply a title</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <style>
+            ._content{
+                background-color: black;
+                padding:2%;
+            }
+            ._picture{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: auto;
+            }
+            ._form{
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                border: 10;
+                border-color: white;
+                color:white;
+            }
+
+            .RegisterBtn{
+                 color: white;
+                background-color:rgb(0,48,143);
+            }
+            .ClearBtn{
+                color: white;
+                margin-left:10%;
+                background-color:rgb(0,48,143);
+            }
+            .grid-container{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                width:30%;
+                margin:auto;
+            }
+            .grid-item{
+                text-align:left;
+            }
+            .button-normal input{
+                width:50%;
+                padding:1% 0;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="_content">
+        <header><img class="_picture" src="./picture/register.PNG" alt="Login"></header>
+        <form style="width:100%;" class="_form" action="getRegistrationDetails.jsp" name="register">
+            
+            <div class="grid-container">
+                <div class="grid-item"><label class="username" >Username :</label> </div>
+                <div class="grid-item"><input type="text" name="username"><br><br></div>
+
+                <div class="grid-item"><label class="password">Password :</label></div>
+                <div class="grid-item"><input type="password"  name="password"><br><br></div>
+
+                <div class="grid-item"><label  class="confirmpassword"> Confirm Password :</label></div>
+                <div class="grid-item"><input type="password"  name="confirmpassword"><br><br></div>
+
+                <div class="grid-item"><label class="name">Name :</label></div>
+                <div class="grid-item"><input type="text" name="name"><br><br></div>
+
+                <div class="grid-item"><label  class="gender">Gender :</label></div>
+                <div class="grid-item"><input type="radio"  name="gender" value="M">
+                <label for="male" style="color:white">MALE</label>&nbsp;
+                <input type="radio"  name="gender" value="F">
+                <label for="female" style="color:white">FEMALE</label><br><br></div>
+
+                <div class="grid-item"><label  style="color:white"  class="ic">IC :</label> </div>
+                <div class="grid-item"><input type="text" name="ic"><br><br></div>
+
+                <div class="grid-item"><label class="phone">Phone :</label></div>
+                <div class="grid-item"><input type="text" name="phone"><br><br></div>
+
+                <div class="grid-item"><label  class="gmail">Gmail :</label> </div>
+                <div class="grid-item"><input type="text" name="gmail"><br><br></div>
+
+                <div class="grid-item"><label  class="address">Address :</label> </div>
+                <div class="grid-item"><input type="text" name="address"><br><br><br></div>
+
+                
+            </div>
+            <div class="d-flex flex-row button-normal" style="width:30%;margin:auto">
+                    <div class="w-50"><input type="submit" value="Register" class="RegisterBtn" ></div>
+                    <div class="w-50"><input type="reset" value="Clear" class="ClearBtn"></div>
+                </div>
+            
+        </form>
+        
+       
+    </body>
+</html>

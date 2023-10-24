@@ -1,0 +1,21 @@
+SMAP
+AdminRatingComment_jsp.java
+JSP
+*S JSP
+*F
++ 0 AdminRatingComment.jsp
+Backend/AdminRatingComment.jsp
+*L
+5,5:46
+9:50,2
+11,2:53
+12,171:55
+183:226,3
+184,27:229
+211:256,3
+212:259
+213,6:260,3
+219:278
+220:279,3
+221,37:282
+*E
